@@ -1,0 +1,5 @@
+ofuscación
+https://linuxmint.com/
+RUST
+npm init - se trae el package json
+probar la de spotify
