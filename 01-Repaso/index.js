@@ -1,5 +1,4 @@
 const request = require('request');
-const { get } = require('request');
 
 /*
     JS Vanilla
