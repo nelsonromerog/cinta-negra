@@ -1,7 +1,7 @@
 //Configuracion
 const express = require('express')
 const api = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 //Endpoints
 api.get('/', (_, res) => res.status(200).json({message: "it's alive!"}))
