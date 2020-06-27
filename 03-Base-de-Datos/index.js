@@ -1,11 +1,12 @@
 //Configuracion
+require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 const api = express()
 const PORT = process.env.PORT || 3000
 
 //Conexion a Base de Datos
-mongoose.connect('mongodb://chepe:qsc753@cintanegra-shard-00-00-zyjuw.mongodb.net:27017,cintanegra-shard-00-01-zyjuw.mongodb.net:27017,cintanegra-shard-00-02-zyjuw.mongodb.net:27017/test?ssl=true&replicaSet=CintaNegra-shard-0&authSource=admin&retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database connected!'))
     .catch(() => console.log('Error connecting to database...'))
 
