@@ -37,23 +37,51 @@ const flightsSchema = new mongoose.Schema({
 //Generar un modelo a partir del esquema -> Objeto que nos permite interactuar con la coleccion
 const Flights = mongoose.model('Flights', flightsSchema)
 
+api.use(express.urlencoded({ extended: true}))
+api.use(express.json({ extended: true}))
+
 //Endpoints
 api.get('/', (_, res) => res.status(200).json({message: "it's alive!"}))
 
 //Create
-api.post('/api/animals', (req, res) => {
-    //1) Recibir el animal que se quiere crear desde el cliente
-    //2) Pedirle a la base da datos que guarde el nuevo animal
+api.post('/api/flights', (req, res) => {
+    //1) Recibir la informacion de vuelo que se quiere crear desde el cliente
+    const { body } = req
+    //2) Pedirle a la base da datos que cree un nuevo documento a partir del body del cliente
+    const newFlights = new Flights(body)
+    newFlights.save()
     //3) Con la respuesta que recibamos de la base de datos, le respondemos al cliente
-    const animal = {id: 'A1', nombre: 'Firulais', edad: 4}
-    res.status(201).json({animal})
+        .then((resMongo) => res.status(201).json(resMongo))
+        .catch((err) => res.status(400).json(err))
 })
 
-//Read
+//Read All
+api.get('/api/flights', (req, res) => {
+    Flights.find()
+        .then((resMongo) => res.status(200).json(resMongo))
+        .catch((err) => res.status(400).json(err))
+})
+
+//Read One
+api.get('/api/flights/:id', (req, res) => {
+    Flights.findById(req.params.id)
+        .then((resMongo) => res.status(200).json(resMongo))
+        .catch((err) => res.status(400).json(err))
+})
 
 //Update
+api.patch('/api/flights/:id', (req, res) => {
+    Flights.findByIdAndUpdate(req.params.id, req.params.id, { new: true })
+        .then((resMongo) => res.status(200).json(resMongo))
+        .catch((err) => res.status(400).json(err))
+})
 
 //Delete
+api.delete('/api/flights/:id', (req, res) => {
+    Flights.findByIdAndDelete(req.params.id)
+        .then((resMongo) => res.status(204).json(resMongo))
+        .catch((err) => res.status(400).json(err))
+})
 
 //Encender el servidor
 api.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`))
