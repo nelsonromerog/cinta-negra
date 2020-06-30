@@ -42,14 +42,17 @@ const ticketSchema = new mongoose.Schema({
     subtotal: {
         type: Number,
         required: true,
+        default: 0
     },
     IVA: {
         type: Number,
         required: true,
+        default: 0
     },
     total: {
         type: Number,
         required: true,
+        default: 0
     },
     articulos: {
         type: [articuloSchema],
@@ -83,17 +86,17 @@ api.post('/api/articulos', (req, res) => {
         .then((resMongo) => res.status(201).json(resMongo))
         .catch((err) => res.status(400).json(err))
 })
-// Ticket
-api.post('/api/tickets', (req, res) => {
-    //1) Recibir la informacion de vuelo que se quiere crear desde el cliente
-    const { body } = req
-    //2) Pedirle a la base da datos que cree un nuevo documento a partir del body del cliente
-    const newTickets = new Tickets(body)
-    newTickets.save()
-    //3) Con la respuesta que recibamos de la base de datos, le respondemos al cliente
-        .then((resMongo) => res.status(201).json(resMongo))
-        .catch((err) => res.status(400).json(err))
-})
+// // Ticket
+// api.post('/api/tickets', (req, res) => {
+//     //1) Recibir la informacion de vuelo que se quiere crear desde el cliente
+//     const { body } = req
+//     //2) Pedirle a la base da datos que cree un nuevo documento a partir del body del cliente
+//     const newTickets = new Tickets(body)
+//     newTickets.save()
+//     //3) Con la respuesta que recibamos de la base de datos, le respondemos al cliente
+//         .then((resMongo) => res.status(201).json(resMongo))
+//         .catch((err) => res.status(400).json(err))
+// })
 
 //Read All
 // Articulo
@@ -156,6 +159,10 @@ api.delete('/api/tickets/:id', (req, res) => {
 
 /*
    3) Crear archivos de routes distintos para las operaciones de tickets y productos
+*/
+
+
+/*
    4) Mediante un ENDPOINT calcular el subtotal, IVA y total de
        algún ticket.
     
@@ -163,6 +170,8 @@ api.delete('/api/tickets/:id', (req, res) => {
     subtotal, IVA y total con un valor default en 0.
     NOTA: Al hacer la petición del paso 4) se debe actualizar
     el contenido del ticket según los artículos que contenga
+*/
+/*
    5) Deploy con Heroku
    6) En la raíz del server devolver una vista, documentar la API utilizando HTML y CSS, puedes utilizar Bootstrap, Materialize, Bulma, etc (No jQuery)
 */
