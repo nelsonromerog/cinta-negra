@@ -22,7 +22,7 @@ const ticketSchema = new mongoose.Schema({
     default: 0,
   },
   products: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Products',
   },
 });
